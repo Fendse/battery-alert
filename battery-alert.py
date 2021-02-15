@@ -86,9 +86,9 @@ def notice_display_device_change(interface : str, changed : Dict[str, Any], inva
             level_string = f" {battery_level.name}"
         
 
-        summary = f"Battery{level_string}"
+        summary = f"{device_type.name}{level_string}"
 
-        body = f"Battery{level_string}: {percentage}%\n{status.name}"
+        body = f"{device_type.name}{level_string}: {percentage}%\n{status.name}"
 
         time_to_full = changed["TimeToFull"]
         time_to_empty = changed["TimeToEmpty"]
