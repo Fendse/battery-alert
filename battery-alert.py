@@ -25,22 +25,22 @@ class DeviceType(Enum):
     """
     A power device type as reported by org.freedesktop.UPower.Device.Type
     """
-    UNKNOWN = 0
-    LINE_POWER = 1
-    BATTERY = 2
+    Unknown = 0
+    Line_power = 1
+    Battery = 2
     UPS = 3
-    MONITOR = 4
-    MOUSE = 5
-    KEYBOARD = 6
+    Monitor = 4
+    Mouse = 5
+    Keyboard = 6
     PDA = 7
-    PHONE = 8
+    Phone = 8
 
 class BatteryLevel(Enum):
     """
     A battery level as reported by org.freedesktop.UPower.Device.BatteryLevel
     """
     Unknown = 0
-    No_level = 1
+    No_level = 1 # Can't call it "None"
     Low = 3
     Critical = 4
     Normal = 6
