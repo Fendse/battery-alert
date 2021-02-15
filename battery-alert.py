@@ -48,6 +48,9 @@ class BatteryLevel(Enum):
     Full = 8
 
 class BatteryState(Enum):
+    """
+    A device state as reported by org.freedesktop.UPower.Device.State
+    """
     Unknown = 0
     Charging = 1
     Discharging = 2
