@@ -25,39 +25,89 @@ class DeviceType(Enum):
     """
     A power device type as reported by org.freedesktop.UPower.Device.Type
     """
-    Unknown = 0
-    Line_power = 1
-    Battery = 2
+    UNKNOWN = 0
+    LINE_POWER = 1
+    BATTERY = 2
     UPS = 3
-    Monitor = 4
-    Mouse = 5
-    Keyboard = 6
+    MONITOR = 4
+    MOUSE = 5
+    KEYBOARD = 6
     PDA = 7
-    Phone = 8
+    PHONE = 8
+
+    def __init__(self, value : int):
+        names = {
+            0: "Unknown",
+            1: "Line power",
+            2: "Battery",
+            3: "UPS",
+            4: "Monitor",
+            5: "Mouse",
+            6: "Keyboard",
+            7: "PDA",
+            8: "Phone",
+        }
+        self._nicename = names[value]
+        self._value_ = value
+
+    def __str__(self):
+        return self._nicename
 
 class BatteryLevel(Enum):
     """
     A battery level as reported by org.freedesktop.UPower.Device.BatteryLevel
     """
-    Unknown = 0
-    No_level = 1 # Can't call it "None"
-    Low = 3
-    Critical = 4
-    Normal = 6
-    High = 7
-    Full = 8
+    UNKNOWN = 0
+    NONE = 1
+    LOW = 3
+    CRITICAL = 4
+    NORMAL = 6
+    HIGH = 7
+    FULL = 8
+
+    def __init__(self, value : int):
+        names = {
+            0: "Unknown",
+            1: "None",
+            3: "Low",
+            4: "Critical",
+            6: "Normal",
+            7: "High",
+            8: "Full",
+        }
+        self._nicename = names[value]
+        self._value_ = value
+
+    def __str__(self):
+        return self._nicename
 
 class BatteryState(Enum):
     """
     A device state as reported by org.freedesktop.UPower.Device.State
     """
-    Unknown = 0
-    Charging = 1
-    Discharging = 2
-    Empty = 3
-    Fully_charged = 4
-    Pending_charge = 5
-    Pending_discharge = 6
+    UNKNOWN = 0
+    CHARGING = 1
+    DISCHARGING = 2
+    EMPTY = 3
+    FULLY_CHARGED = 4
+    PENDING_CHARGE = 5
+    PENDING_DISCHARGE = 6
+
+    def __init__(self, value : int):
+        names = {
+            0: "Unknown",
+            1: "Charging",
+            2: "Discharging",
+            3: "Empty",
+            4: "Fully charged",
+            5: "Pending charge",
+            6: "Pending discharge",
+        }
+        self._nicename = names[value]
+        self._value_ = value
+
+    def __str__(self):
+        return self._nicename
 
 
 def notice_display_device_change(interface : str, changed : Dict[str, Any], invalidated : List[str]):
@@ -83,7 +133,7 @@ def notice_display_device_change(interface : str, changed : Dict[str, Any], inva
         
         battery_level = BatteryLevel(device.BatteryLevel)
 
-        if battery_level == BatteryLevel.No_level:
+        if battery_level == BatteryLevel.NONE:
             level_string = ""
         else:
             level_string = f" {battery_level.name}"
