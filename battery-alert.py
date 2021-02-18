@@ -180,7 +180,7 @@ def device_monitor(device : pydbus.proxy.ProxyObject, important_properties : Set
 
 
 if __name__ == "__main__":
-    arg_parser = argparse.ArgumentParser()
+    arg_parser = argparse.ArgumentParser(description="UPower battery notification daemon")
 
     presumed_important = set(("IconName", "BatteryLevel", "State", "Online"))
     alert_on_help_text = f"""
@@ -217,6 +217,9 @@ if __name__ == "__main__":
         action="append", dest="devices",
         default=[],
         metavar=device_metavar, help=device_help_text)
+
+    arg_parser.add_argument("--version",
+        action="version", version="Battery Alert version 0.0.0")
 
     arguments = arg_parser.parse_args()
 
