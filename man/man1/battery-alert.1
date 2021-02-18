@@ -1,0 +1,74 @@
+.TH battery-alert 1 "18 February 2021" "" "Linux User's Manual"
+
+.SH NAME
+battery-alert \- UPower notification daemon
+
+.SH SYNOPSIS
+.sp
+.nf
+\fBbattery-alert\fR [\fB--device\fR \fBDEVICE\fR] [\fB--alert-on\fR \fBPROPERTY\fR] [\fB--no-alert-on\fR \fBPROPERTY]\fR
+\fBbattery-alert\fR \fB--help\fR
+\fBbattery-alert\fR \fB--version\fR
+.fi
+
+.SH DESCRIPTION
+.PP
+\fIbattery-alert\fR is a simple daemon which listens
+for \fBUPower\fR(7) events on the system bus and emits desktop
+notifications.
+
+.SH OPTIONS
+
+.PP
+\fB\-\-alert-on\fR
+\fBPROPERTY\fR
+.RS 4
+Send a desktop notification when the property \fBPROPERTY\fR changes.
+Can be specified multiple times to listen for multiple properties.
+The properties \fIIconName\fR, \fIBatteryLevel\fR, \fIState\fR and \fIOnline\fR are used even if not explicitly specified.
+.RE
+
+.PP
+\fB\-\-device\fR
+\fBDEVICE\fR
+.RS 4
+Listen for events from \fBDEVICE\fR.
+If \fB\DEVICE\fR does not begin with /
+the object path \fI/org/freedesktop/UPower/devices/\fBDEVICE\fR is used instead.
+This option can be specified repeatedly to listen on multiple
+devices at once.
+If no device is specified, the daemon listens to \fI/org/freedesktop/UPower/devices/DisplayDevice\fR.
+.RE
+
+.PP
+\fB\-\-help\fR
+.RS 4
+Print usage information, then exit.
+.RE
+
+.PP
+\fB\-\-no-alert-on\fR
+\fBPROPERTY\fR
+.RS 4
+Don't send a desktop notification when the property \fBPROPERTY\fR changes.
+This can be used to negate arguments to \fB\-\-alert-on\fR
+or to avoid notifications for the default properties
+\fIIconName\fR, \fIBatteryLevel\fR, \fIState\fR and \fIOnline\fR.
+.RE
+
+.PP
+\fB\-\-version\fR
+.RS 4
+Print version number, then exit.
+.RE
+
+.SH AUTHOR
+.PP
+Written by Sara Johnsson
+<46252070+Fendse@users.noreply.github.com>
+.RE
+
+.SH SEE ALSO
+\fBupower\fR(1),
+\fBupowerd\fR(8),
+\fBUPower\fR(7)

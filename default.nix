@@ -1,25 +1,28 @@
-{ pkgs, stdenv, ... }:
+{ pkgs, ... }:
 
-stdenv.mkDerivation {
+pkgs.stdenv.mkDerivation {
   pname = "battery-alert";
   version = "0.0.0";
 
-  src = ./battery-alert.py;
+  src = ./src;
+  
+  manpages = ./man;
 
   buildInputs = [
     (pkgs.python3.withPackages (p: with p; [ pydbus ]))
   ];
 
   unpackPhase = ''
-    cp "$src" battery-alert.py
+    cp "$src/battery-alert.py" battery-alert
   '';
 
   buildPhase = ''
-    patchShebangs battery-alert.py
+    patchShebangs battery-alert
   '';
 
   installPhase = ''
     mkdir -p "$out/bin"
-    mv battery-alert.py "$out/bin/battery-alert"
+    mv battery-alert "$out/bin/battery-alert"
+    cp -r "$manpages" "$out/man"
   '';
 }
